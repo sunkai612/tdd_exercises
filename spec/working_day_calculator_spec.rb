@@ -2,7 +2,7 @@ require_relative '../working_day_calculator'
 
 RSpec.describe WorkingDayCalculator do
   describe ".previous_business_date" do
-    it "1/4, 5 => 1/11" do
+    it "1/3 => 12/31" do
       input_date = Date.new(2016, 1, 3) # Saturday
 
       result = WorkingDayCalculator.previous_business_date(input_date)
