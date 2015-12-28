@@ -1,7 +1,5 @@
-require 'pry'
-require 'rspec'
-require 'rubocop'
-require_relative 'working_day_calculator'
+require_relative '../working_day_calculator'
+require 'Date'
 
 RSpec.describe WorkingDayCalculator do
   describe '#next_work_day' do
