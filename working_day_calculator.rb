@@ -1,3 +1,5 @@
+require 'Date'
+
 class WorkingDayCalculator
 	attr_reader :date
 
@@ -8,12 +10,27 @@ class WorkingDayCalculator
 	def next_work_day
     result = date
 
-    while(isWeekend?(result) || holiday?(result)) do 
+    while(holiday?(result)) do 
       result = result.next_day
     end
 
-    return result
+    result
 	end
+
+  def after_work_days_of(number)
+    count = number
+    result = date
+
+    while count != 0 do
+      result = result.next_day
+
+      unless holiday?(result)
+        count -= 1
+      end
+    end
+
+    result
+  end
 
 	private
 
@@ -40,8 +57,12 @@ class WorkingDayCalculator
       Date.new(2015, 10, 10)
     ]
 
-    holidays.any? do |holiday|
-      date_equal?(current, holiday)
+    if isWeekend?(current)
+      return true
+    else
+      holidays.any? do |holiday|
+        date_equal?(current, holiday)
+      end
     end
   end
 end

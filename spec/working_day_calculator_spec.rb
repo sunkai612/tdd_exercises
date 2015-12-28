@@ -1,5 +1,4 @@
 require_relative '../working_day_calculator'
-require 'Date'
 
 RSpec.describe WorkingDayCalculator do
   describe '#next_work_day' do
@@ -21,6 +20,28 @@ RSpec.describe WorkingDayCalculator do
       let(:cal) { WorkingDayCalculator.new(Date.new(2015, 12, 26)) }
       it 'returns next monday' do
         expect(cal.next_work_day).to eq(Date.new(2015, 12, 28))
+      end
+    end
+  end
+
+  describe '#after_work_days_of' do
+    let(:cal) { WorkingDayCalculator.new(Date.new(2015, 12, 21)) }
+
+    context 'when pass 0 day' do
+      it 'returns this day' do
+        expect(cal.after_work_days_of(0)).to eq(Date.new(2015, 12, 21))
+      end
+    end
+
+    context 'when pass 1 day' do
+      it 'returns day after 1 workdays' do
+        expect(cal.after_work_days_of(1)).to eq(Date.new(2015, 12, 22))
+      end
+    end
+
+    context 'when pass 5 days' do
+      it 'returns day after 5 workdays' do
+        expect(cal.after_work_days_of(5)).to eq(Date.new(2015, 12, 28))
       end
     end
   end
