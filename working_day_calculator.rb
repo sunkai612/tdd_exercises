@@ -42,6 +42,20 @@ class WorkingDayCalculator
     end
   end
 
+  def self.previous_business_date_by_range(input_date, range)
+    current_date = input_date
+
+    while range != 0
+      current_date = current_date.prev_day
+
+      if current_date.business_day?
+        range -= 1
+      end
+    end
+
+    current_date
+  end
+
   # 1/4, 5 => 1/11
   def self.next_business_date_by_range(input_date, range)
     current_date = input_date
