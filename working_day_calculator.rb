@@ -19,27 +19,11 @@ end
 
 class WorkingDayCalculator
   def self.previous_business_date(input_date)
-    return input_date if input_date.business_day?
-
-    current_date = input_date
-
-    while !current_date.business_day?
-      current_date = current_date.prev_day
-
-      return current_date if current_date.business_day?
-    end
+    business_date(input_date, move: :prev_day)
   end
 
   def self.next_business_date(input_date)
-    return input_date if input_date.business_day?
-
-    current_date = input_date
-
-    while !current_date.business_day? # holiday
-      current_date = current_date.next
-
-      return current_date if current_date.business_day?
-    end
+    business_date(input_date, move: :next)
   end
 
   def self.previous_business_date_by_range(input_date, range)
@@ -52,6 +36,18 @@ class WorkingDayCalculator
   end
 
   private
+
+    def self.business_date(input_date, move:)
+      return input_date if input_date.business_day?
+
+      current_date = input_date
+
+      while !current_date.business_day? # holiday
+        current_date = current_date.send(move)
+
+        return current_date if current_date.business_day?
+      end
+    end
 
     def self.business_date_by_range(input_date, range, move:)
       current_date = input_date
