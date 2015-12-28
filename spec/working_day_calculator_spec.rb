@@ -12,41 +12,45 @@ RSpec.describe WorkingDayCalculator do
   end
 
   describe ".next_business_date" do
+    def result(input_date)
+      WorkingDayCalculator.next_business_date(input_date)
+    end
+
     it "weekend returns business monday" do
       input_date = Date.new(2016, 1, 2)
 
-      expect(WorkingDayCalculator.next_business_date(input_date)).to eq Date.new(2016, 1, 4)
+      expect(result(input_date)).to eq Date.new(2016, 1, 4)
     end
 
     context "national holidays of 2016" do
       it "2016/01/01" do
         input_date = Date.new(2016, 1, 1)
 
-        expect(WorkingDayCalculator.next_business_date(input_date)).to eq Date.new(2016, 1, 4)
+        expect(result(input_date)).to eq Date.new(2016, 1, 4)
       end
 
       it "2016/02/08" do
         input_date = Date.new(2016, 2, 8)
 
-        expect(WorkingDayCalculator.next_business_date(input_date)).to eq Date.new(2016, 2, 15)
+        expect(result(input_date)).to eq Date.new(2016, 2, 15)
       end
 
       it "2016/02/29" do
         input_date = Date.new(2016, 2, 29)
 
-        expect(WorkingDayCalculator.next_business_date(input_date)).to eq Date.new(2016, 3, 1)
+        expect(result(input_date)).to eq Date.new(2016, 3, 1)
       end
 
       it "2016/04/05" do
         input_date = Date.new(2016, 4, 5)
 
-        expect(WorkingDayCalculator.next_business_date(input_date)).to eq Date.new(2016, 4, 6)
+        expect(result(input_date)).to eq Date.new(2016, 4, 6)
       end
 
       it "2016/06/10" do
         input_date = Date.new(2016, 6, 10)
 
-        expect(WorkingDayCalculator.next_business_date(input_date)).to eq Date.new(2016, 6, 13)
+        expect(result(input_date)).to eq Date.new(2016, 6, 13)
       end
 
       it "2016/09/16" do
