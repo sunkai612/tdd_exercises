@@ -68,7 +68,7 @@ RSpec.describe WorkingDayCalculator do
   end
 
   describe ".previous_business_date_by_range" do
-    it "10/11, 1 => 10/7" do
+    it "10/11 + 1 day => 10/7" do
       input_date = Date.new(2016, 10, 11)
       range = 1
 
@@ -79,7 +79,7 @@ RSpec.describe WorkingDayCalculator do
   end
 
   describe ".next_business_date_by_range" do
-    it "1/4, 5 => 1/11" do
+    it "1/4 + 5 days => 1/11" do
       input_date = Date.new(2016, 1, 4)
       range = 5
 
