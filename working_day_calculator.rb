@@ -17,6 +17,16 @@ class WorkingDayCalculator
     result
 	end
 
+  def prev_work_day
+    result = date
+
+    while(holiday?(result)) do 
+      result = result.prev_day
+    end
+
+    result 
+  end
+
   def after_work_days_of(number)
     count = number
     result = date

@@ -24,6 +24,29 @@ RSpec.describe WorkingDayCalculator do
     end
   end
 
+  describe '#prev_work_day' do
+    context 'when work day' do
+      let(:cal) { WorkingDayCalculator.new(Date.new(2015, 12, 28)) }
+      it 'returns this day' do
+        expect(cal.prev_work_day).to eq(Date.new(2015, 12, 28))
+      end
+    end
+
+    context 'when holiday' do
+      let(:cal) { WorkingDayCalculator.new(Date.new(2015, 2, 12)) }
+      it 'returns next workday' do
+        expect(cal.prev_work_day).to eq(Date.new(2015, 2, 6))
+      end
+    end
+
+    context 'when weekend' do
+      let(:cal) { WorkingDayCalculator.new(Date.new(2015, 12, 27)) }
+      it 'returns next monday' do
+        expect(cal.prev_work_day).to eq(Date.new(2015, 12, 25))
+      end
+    end
+  end
+
   describe '#after_work_days_of' do
     let(:cal) { WorkingDayCalculator.new(Date.new(2015, 12, 21)) }
 
