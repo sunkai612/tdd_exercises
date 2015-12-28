@@ -30,7 +30,6 @@ class WorkingDayCalculator
     business_date_by_range(input_date, range, move: :prev_day)
   end
 
-  # 1/4, 5 => 1/11
   def self.next_business_date_by_range(input_date, range)
     business_date_by_range(input_date, range, move: :next)
   end
