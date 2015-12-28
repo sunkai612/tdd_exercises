@@ -35,6 +35,10 @@ class WorkingDayCalculator
     business_date_by_range(input_date, range, move: :next)
   end
 
+  def self.business_day?(input_date)
+    input_date.business_day?
+  end
+
   private
 
     def self.business_date(input_date, move:)

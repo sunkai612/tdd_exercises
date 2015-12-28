@@ -88,4 +88,22 @@ RSpec.describe WorkingDayCalculator do
       expect(result).to eq Date.new(2016, 1, 11)
     end
   end
+
+  describe ".business_day?" do
+    it "returns true if business day" do
+      input_date = Date.new(2016, 1, 4)
+
+      result = WorkingDayCalculator.business_day?(input_date)
+
+      expect(result).to eq true
+    end
+
+    it "returns false if holiday" do
+      input_date = Date.new(2016, 1, 1)
+
+      result = WorkingDayCalculator.business_day?(input_date)
+
+      expect(result).to eq false
+    end
+  end
 end
