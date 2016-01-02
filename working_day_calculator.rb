@@ -1,7 +1,7 @@
 require 'Date'
 
 class WorkingDayCalculator
-	attr_reader :date, :custom_holidays
+  attr_reader :date, :custom_holidays
 
   DEFAULT_HOLIDAYS = [
     Date.new(2015, 1, 1),
@@ -17,12 +17,12 @@ class WorkingDayCalculator
     Date.new(2015, 10, 10)
   ]
 
-	def initialize(date, custom_holidays=[])
-		@date = date
+  def initialize(date, custom_holidays=[])
+    @date = date
     @custom_holidays = custom_holidays
-	end
+  end
 
-	def next_work_day
+  def next_work_day
     result = date
 
     while(holiday?(result)) do
@@ -30,7 +30,7 @@ class WorkingDayCalculator
     end
 
     result
-	end
+  end
 
   def prev_work_day
     result = date
@@ -61,15 +61,15 @@ class WorkingDayCalculator
     !holiday?(date)
   end
 
-	private
+  private
 
   def isWeekend?(current)
     return current.sunday? || current.saturday?
   end
 
-	def date_equal?(current, date2)
-		return current.mday == date2.mday && current.month == date2.month
-	end
+  def date_equal?(current, date2)
+    return current.mday == date2.mday && current.month == date2.month
+  end
 
   def holiday?(current)
     holidays = DEFAULT_HOLIDAYS + custom_holidays
