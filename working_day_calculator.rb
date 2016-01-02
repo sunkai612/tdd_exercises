@@ -25,7 +25,7 @@ class WorkingDayCalculator
   def next_work_day
     result = date
 
-    while(holiday?(result)) do
+    while holiday?(result) do
       result = result.next_day
     end
 
@@ -35,7 +35,7 @@ class WorkingDayCalculator
   def prev_work_day
     result = date
 
-    while(holiday?(result)) do
+    while holiday?(result) do
       result = result.prev_day
     end
 
@@ -64,22 +64,20 @@ class WorkingDayCalculator
   private
 
   def isWeekend?(current)
-    return current.sunday? || current.saturday?
+    current.sunday? || current.saturday?
   end
 
   def date_equal?(current, date2)
-    return current.mday == date2.mday && current.month == date2.month
+    current.mday == date2.mday && current.month == date2.month
   end
 
   def holiday?(current)
+    return true if isWeekend?(current)
+    
     holidays = DEFAULT_HOLIDAYS + custom_holidays
-
-    if isWeekend?(current)
-      return true
-    else
-      holidays.any? do |holiday|
-        date_equal?(current, holiday)
-      end
+      
+    holidays.any? do |holiday|
+      date_equal?(current, holiday)
     end
   end
 end
